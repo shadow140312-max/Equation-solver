@@ -1,4 +1,5 @@
 /*Thinking
+Day 1 and 2 raw thinking
 whats my goal 
 Goal- Make an equation sovler 
  -find values of variables 
