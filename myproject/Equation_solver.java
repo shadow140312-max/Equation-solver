@@ -1,6 +1,8 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 class Equation_solver{
@@ -50,26 +52,57 @@ return finalans;
     }
 
     public static String adder(List<String> variables,List<String> constants){
-Set<String> setvar=new HashSet<>();
+HashMap<String,Integer> setvar=new HashMap<>();
 List<Integer> listconst=new ArrayList<>();
+List<String> liststring=new ArrayList<>();
+if(constants.get(0)==""){
+variables.remove(0);
+constants.remove(0);
+}
+System.out.println(variables);
+System.out.println(constants);
 
 for(int i=0;i<variables.size();i++){
 String tem=variables.get(i);
-    if(setvar.contains(tem)){
-listconst.set(i,list.get(i)+Integer.parseInt(constants.get(i)));
+System.out.println("i "+i);
+    if(setvar.containsKey(tem)){
+      
+listconst.set(setvar.get(tem),listconst.get(setvar.get(tem))+Integer.parseInt(constants.get(i)));
+System.out.println(listconst);
+        
     }else{
-        setvar.add(tem);
+    
+        setvar.put(tem, i);
+        liststring.add(tem);
+        System.out.println("tem "+tem);
+        System.out.println(i);
+        
+        
         listconst.add(Integer.parseInt(constants.get(i)));
+        System.out.println(listconst);
+        
     }
 
 
-  }    
+  }  
+  String ans="";
+System.out.println(liststring);
+for(int i=0;i<listconst.size();i++){
+    String tem=listconst.get(i).toString();
+
+    if(listconst.get(i)>=0){
+tem="+"+tem;
+    }
+ans+=tem+liststring.get(i);
+}
+
+  return ans;
 }
     public static void main(String[] args) {   
-        String example="+11234567890cj-1cjkhf-1cjgsjh264+6541=4+ll_457682+1jufioaj-fjaokl+48997295208";//at least 1 constant shoudl be attached 
-        System.out.println(Seperator(ListMaker(example)).get(0));
-                System.out.println(Seperator(ListMaker(example)).get(1));
-                System.out.println(ListMaker(example));
+        String example="+1000+4x+8b+3x+2b+5x+50+10x+5b+1x+5b+50";//at least 1 constant shoudl be attac
+     System.out.println(adder(Seperator(ListMaker(example)).get(0),Seperator(ListMaker(example)).get(1)));
+               
+             
             
             }
 }

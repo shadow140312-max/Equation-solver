@@ -14,17 +14,37 @@ so  what shoudl i make i should make fundamental then using them i shodul
      setp 1 identify constants
      -add them up 
      -done
+    
+  Matching like terms-   
      89x-34x-90l-90 so these are expressiosn sepertaed by =,-,etc.. 
 my function can iterate teh whole string it and it can seperate constants into another list and add them or make another array and add
 everything in that array 
 
-to calculate varaibles i should first seperate all the expression then add teh const then tehn i shoudl reove all 
+to calculate varaibles i should first seperate all the expression then add the const then tehn i shoudl reove all all the numerical
+coeffient in all the vraiables like removign 89 form 89x so then i can match like and unlike terms
+
+-- after i have implneted this wherei can seprertae numberical values and variables into 2 list i will create ans set that will sotre how many
+varaibles i have 2a+3b+2a in this the lsit woudl be  variable list =a,b,a const list = 2,3,2  so my set will iterate in vatriblae slist and 
+check if it has it or not if its nto having it add it and as both list are structured and ordered it will pull it snumberail value
+ from const list so , i nend to maintain 2 sets too ones for var and one for const so in 2a+3b+2a case my code will fist iterate through 
+ a,b,a list it will add a as its not their then in set1 then add its numerical value in set 2 which is 2 then it will add b
+ and is numerical value then again in A when it comes again it wont add A but add add the numerical value in set 2 btu 2 sets in not neede 1 set and 1 list
+ will do it 
 
 
 
+Day 3--------------------------------------------------------------
 
+i have solved many bugs and now my program can seprete variables seperate all the terms then seperte the numerical values and variables and 
+add all like terms and make then add the lists that i have seperated 
 
-
+_next Goal-
+now i should make it capable for transposing and solving a liner equation first -
+     -so how will it do that firs my  program shoudl knwo all the basic things like +,- 
+     firs i shoudl make my program capable of multipllciation and divison 
+     and the laws of exponents
+     -i can create an object that can help me with that i can name it expresison calss i can make various funtioncs
+     like expresion multiplication expresion adding but doing that would be hard changing it may not turn out to be good toto 
 
 
 
