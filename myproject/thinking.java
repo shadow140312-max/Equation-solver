@@ -45,8 +45,17 @@ now i should make it capable for transposing and solving a liner equation first 
      and the laws of exponents
      -i can create an object that can help me with that i can name it expresison calss i can make various funtioncs
      like expresion multiplication expresion adding but doing that would be hard changing it may not turn out to be good toto 
-
-
+while i was making my most fundamentl class i faced on challenge in that the add fuction what shudl it do if the 2 terms are 
+unlike terms i can return 0 as the numerical value in tht case now this is solved 
+ i am having one more probelm how to multiply and divide variables i can create anohter calss variabel class that takes the vraibel part of a term 
+ and variabel part of another and divides or multiplies them but hwo too i can take the shorted varPart take a vairable form that and 
+ check if that part is thaving that var or not then check if tis having nad exponental value or not if yes tht increas the exponental value 
+  a better way would be cerating a sub class variabels and varPart is jsut list of variabels got it i will create 2 properties for var
+  one is string main avar and one is string expo part if i wiant to multiply 2 var that are same i will jsut incrase the expo part 
+  by 1 but if thery are different i can jsut reutrn varPart objec tinstead of var object even if thery are smme now in 
+  variable class i am encountering one more porbelm what shoudl i do one parts like 6^2
+  now its up to me what my program shoudl do show the steps too all just the end result i shoudl tell the steps but ignoring the constants 
+  i shoudl make a displey function to that can dispaly the variabel nicely then test it 
 
 
 

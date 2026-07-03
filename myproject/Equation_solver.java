@@ -5,7 +5,99 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+
+
+
+
+ class variable{
+String mainVar;
+int expoPart=1;      
+public variable(String a, int b){
+    this.mainVar=a;
+    this.expoPart=b;
+}                                  //later i will make a variabel.display function otot
+ public variablePart multiplication(variable a){
+    if(this.mainVar!=a.mainVar){
+        List<variable> tem=new ArrayList<>(); 
+        tem.add(this);
+        tem.add(a);
+return new variablePart(tem);
+    }else{
+      List<variable> tem=new ArrayList<>();
+      tem.add(new variable(this.mainVar, (this.expoPart+a.expoPart)));
+return new variablePart(tem);
+    }
+ }
+
+ public variable division(variable a){
+if(this.mainVar.equals(a.mainVar)){
+    if((this.expoPart-a.expoPart)!=0){
+        return new variable(mainVar, (this.expoPart-a.expoPart));
+    }else{
+        return new variable("0", 0);
+
+    }
+}else{
+   return new variable("0", 0);
+}
+ }
+ public void display(){
+  
+    if(expoPart!=0){
+        if(expoPart==1){
+            System.out.print(mainVar);  
+              }else{
+    System.out.print(mainVar+"^"+expoPart);
+              }
+    }else{
+        //prints nothing
+    }
+ }
+
+    }
+
+  class variablePart{
+  List<variable> varPart;
+
+  public variablePart (List<variable> a){
+this.varPart=a;
+  }
+
+ }
 class Equation_solver{
+ /* 
+
+
+    class term{
+         int numerical;
+        String variable;
+        
+
+    public term(int a, String b){
+        this.numerical=a;
+        this.variable=b;
+    }
+        public term add(term a){
+if(a.variable.equals(this.variable)){
+return new term(this.numerical+a.numerical,this.variable);
+
+}else{
+return new term(0,"");
+}
+        }
+
+    public term subtract(term a){
+if(a.variable.equals(this.variable)){
+return new term(this.numerical-a.numerical,this.variable);
+
+}else{
+return new term(0,"");
+}
+    }
+
+    }
+*/
+    /* 
 
     public static List<String> ListMaker(String s){
         List<String> expressions =new ArrayList<>();
@@ -98,10 +190,18 @@ ans+=tem+liststring.get(i);
 
   return ans;
 }
+  /* */
     public static void main(String[] args) {   
+        /* 
         String example="+1000+4x+8b+3x+2b+5x+50+10x+5b+1x+5b+50";//at least 1 constant shoudl be attac
      System.out.println(adder(Seperator(ListMaker(example)).get(0),Seperator(ListMaker(example)).get(1)));
-               
+      */
+        variable a=new variable("x", 4);
+        variable b=new variable("x", 2);
+        variable c=new variable("c",1);
+
+        (a.division(b)).display();
+    //   (a.multiplication(c)).varPart.get(1).display();
              
             
             }
