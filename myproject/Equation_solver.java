@@ -1,3 +1,4 @@
+import java.beans.Expression;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -7,39 +8,38 @@ import java.util.Set;
 
 
 
+class Equation_solver{
 
-
- class variable{
+ public static class  variable{
 String mainVar;
 int expoPart=1;      
 public variable(String a, int b){
     this.mainVar=a;
     this.expoPart=b;
 }                                  //later i will make a variabel.display function otot
- public variablePart multiplication(variable a){
-    if(this.mainVar!=a.mainVar){
-        List<variable> tem=new ArrayList<>(); 
-        tem.add(this);
-        tem.add(a);
-return new variablePart(tem);
-    }else{
-      List<variable> tem=new ArrayList<>();
-      tem.add(new variable(this.mainVar, (this.expoPart+a.expoPart)));
-return new variablePart(tem);
-    }
+ public variablePart multiplication(variablePart a){
+  if(a.varPart.containsKey(this.mainVar)){
+a.varPart.get(this.mainVar).expoPart+=this.expoPart;
+  }else{
+    a.varPart.put(this.mainVar,this);
+    
+  }
+  return a;
+
  }
 
- public variable division(variable a){
-if(this.mainVar.equals(a.mainVar)){
-    if((this.expoPart-a.expoPart)!=0){
-        return new variable(mainVar, (this.expoPart-a.expoPart));
-    }else{
-        return new variable("0", 0);
+ public variablePart division(variablePart a){
+if(a.varPart.containsKey(this.mainVar)){
+    if(a.varPart.get(this.mainVar).expoPart-this.expoPart!=0){
+a.varPart.get(this.mainVar).expoPart-=this.expoPart;
 
+    }else{
+        a.varPart.remove(this.mainVar);
     }
 }else{
-   return new variable("0", 0);
+    a.varPart.put(this.mainVar,new variable(this.mainVar, (this.expoPart*-1)));
 }
+return a;
  }
  public void display(){
   
@@ -55,16 +55,223 @@ if(this.mainVar.equals(a.mainVar)){
  }
 
     }
-
-  class variablePart{
-  List<variable> varPart;
-
-  public variablePart (List<variable> a){
-this.varPart=a;
+ ///////////////////////////////////////////////////////////////////////////////////////////////////
+  public static variablePart variablePartinit(String s){
+  HashMap<String,variable> varPart=new HashMap<>();
+  if(s.equals("")){
+    varPart.put("",new variable("", 1));
+    return new variablePart(varPart);
   }
+for(int i=0;i<s.length()-1;i++){ //skips the last char
+    char tem=s.charAt(i);
+ if(s.charAt(i+1)=='^'){
+    varPart.put(tem+"",new variable(tem+"", Integer.parseInt(s.charAt(i+2)+"")));
+    i+=2;
 
+ }else{
+    varPart.put(tem+"",new variable(tem+"",1));
  }
-class Equation_solver{
+}
+char tem=s.charAt(s.length()-1);
+if(!(tem>47&&tem<58)){   
+    varPart.put(tem+"", new variable(tem+"",1));
+}
+return new variablePart(varPart);
+  }
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  public static class variablePart{
+  HashMap<String,variable> varPart;
+
+  
+  public  variablePart (HashMap<String,variable> a){
+this.varPart=a;
+  }                                                               //note whiel inittialzing all the variables parts 
+        /*          
+public term mul(int index1,int index2,term t){
+    variablePart a=t.termvarPart;
+    variablePart b=t.termvarPart;
+}
+ */ 
+  
+  
+                                                               //shoudl be sorted to use th estring.equal function in add and substract 
+  public void display(){
+    for(String i:this.varPart.keySet()){
+        this.varPart.get(i).display(); 
+    }
+  }
+ 
+}
+/////////////////////////////////////////////////////////////////////////
+public static term TermInit(String s){
+    System.out.println("s="+s);
+    String num="";
+    int start=0;
+    for(int i=0;i<s.length();i++){
+        char tem=s.charAt(i);
+        if((tem>64&&tem<91)||(tem>96&&tem<123)){
+start=i;
+break;
+        }else{
+            num+=tem;
+        }
+    }
+    int n=1;
+    String sdefault="";
+    System.out.println("num="+num);
+    System.out.println("substring="+s.substring(start));
+if(!num.equals("")){
+     n=Integer.parseInt(num);
+    
+}else{
+    System.out.println("only var i guess");
+}
+
+if(start!=0){
+sdefault=s.substring(start);
+}
+   
+    term t= new term(variablePartinit(sdefault),n);
+    System.out.println("term ");
+    t.display();
+    System.out.println("");
+    return t;
+}
+/////////////////////////////////////////////////////////////////////////
+public static class term{
+variablePart termvarPart;
+boolean isbracket=false;
+ int constant=1;
+ expression bracketsPart;           // i shoudl change term inti too
+
+public term(variablePart a,int b){
+this.termvarPart=a;
+this.constant=b;
+}
+/* 
+public expression add(int index1,int index2, expression exp){
+   term a= exp.listTermGroup.get(index1);
+   term b=  exp.listTerm.get(index2);
+if(a.isbracket==false&&b.isbracket==false){
+    for(String i:a.termvarPart.varPart.keySet()){
+        if(!b.termvarPart.varPart.containsKey(i)){
+return exp;
+        }
+    }
+}else{
+    return exp;
+}
+    a.constant+=b.constant;
+    exp.listTerm.remove(index2);
+    return exp;
+}
+
+public expression sub(int index1,int index2, expression exp){
+   term a= exp.listTerm.get(index1);
+   term b=  exp.listTerm.get(index2);
+if(a.isbracket==true&&b.isbracket==true){
+    for(String i:a.termvarPart.varPart.keySet()){
+        if(!b.termvarPart.varPart.containsKey(i)){
+return exp;
+        }
+    }
+}else{
+    return exp;
+}
+    a.constant-=b.constant;
+    exp.listTerm.remove(index2);
+    return exp;
+}
+
+*/
+
+
+
+ public void display(){
+    if(constant>-1){
+    System.out.print("+"+constant);
+    }else{
+        System.out.print(constant);
+    }
+      termvarPart.display();
+ }
+}
+
+public static class termGroup{
+    List<term> termList;
+
+    public termGroup(List<term> a){
+        this.termList =a;
+    }
+    public void display(){
+for(int i=0;i<this.termList.size();i++){
+    this.termList.get(i).display();
+}
+    }
+}
+public static termGroup TermGroupInit(String s){
+List<term> list=new ArrayList<>();
+int start=0;
+if(s.equals("")){
+System.out.println("---error---------------------------");
+list.add(TermInit(s));
+return new termGroup(list);
+}
+
+for(int i=0;i<s.length()-1;i++){
+    char tem=s.charAt(i);
+    if(tem=='*'||tem=='/'){
+list.add(TermInit(s.substring(start,i)));
+start=i+1;
+    }else{
+        if(tem=='('){
+//pending----------------------------
+//---------------------------
+        }
+    }
+}
+char tem=s.charAt(s.length()-1);
+if(!(tem+"").equals(")")){
+    list.add(TermInit(s.substring(start)));
+}
+return new termGroup(list);
+}
+
+
+
+public static class expression{
+
+List<termGroup> listTermGroup;
+ public expression(List<termGroup> a){
+    this.listTermGroup=a;
+ }
+ public void display(){
+for(int i=0;i<this.listTermGroup.size();i++){
+this.listTermGroup.get(i).display();
+}
+ }
+}
+/////////////////////////////////////////////////////////////// 
+public static expression ExpressionInit(String s){
+     int start=0;
+     List<termGroup> listTerm=new ArrayList<>();
+
+    for(int i=0;i<s.length()-1;i++){
+        char tem=s.charAt(i);
+       
+if(tem=='+'||tem=='-'){
+listTerm.add(TermGroupInit(s.substring(start,i)));
+start=i;
+}
+    }
+    char tem=s.charAt(s.length()-1);
+ 
+        listTerm.add(TermGroupInit(s.substring(start,s.length())));
+    
+    return new expression(listTerm);
+}
+
+
  /* 
 
 
@@ -196,12 +403,11 @@ ans+=tem+liststring.get(i);
         String example="+1000+4x+8b+3x+2b+5x+50+10x+5b+1x+5b+50";//at least 1 constant shoudl be attac
      System.out.println(adder(Seperator(ListMaker(example)).get(0),Seperator(ListMaker(example)).get(1)));
       */
-        variable a=new variable("x", 4);
-        variable b=new variable("x", 2);
-        variable c=new variable("c",1);
+     String s="2x+90+86+4xh*90b/78y+90";
+     expression exp=ExpressionInit(s);
+     exp.display();
 
-        (a.division(b)).display();
-    //   (a.multiplication(c)).varPart.get(1).display();
+     
              
             
             }
