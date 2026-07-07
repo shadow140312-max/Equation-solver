@@ -10,7 +10,7 @@ Goal- Make an equation sovler
 so  what shoudl i make i should make fundamental then using them i shodul 
    do things first 
    -my code shoudl solve all the constants
-   -then all the varables
+   -then all the varables 
    so how does an human solve it  
      setp 1 identify constants
      -add them up 
@@ -101,4 +101,38 @@ means there can be mianly 5 things -switching sides
 
                while making fucniton in varibel part i realised that gaving a term calss is not enough 
                there shoudl be an object term group which is groups of term but iwhtout + and -
+   day 6------------------------------------------------------------------
+   i am not able to think how my program will solve complex equation first i shodul think of how to apply boad mass 
+   my prgra woudl search the operatin string of expression and do it according to BODMAS so wht caan i do with i can create a tree but i dont
+   think it owuld be a big help  like solving 9+4-3-5+4 if i make it liek a tree  so if i make it like a tree i shoudl prioritse the leaset
+   valeud opertaiton first and the highest valued at the last beacue i will solve the las then the first these are jsut terms ;
+so how would thismehtod solve variables in 2x+3x-4-5y
+so ti woudl be                 (-)                 (-)
+                          (+)       (+)         5x    -4-5y   so des it help 
+                      2x     3x    -4 -5y   
+                        
+i can implement this by doing bracket operation first 
+i will make a funciton named simplify i will give a tree now in this fucntion whenevenre i enogunter a bracket i will 
+again call simplify this will turn it into a kind of recursive function now i will join that tree with my original one 
+so , in 20+4-6+8-9 corerct wy woudl be to do 20+4=24 then -6+8=2 then it becomes 24+2-9 then 26-9 so =17
+ so corredct way               (-)
+                           (+)    (9)  so hwo to create this tree i can recursively call simplify angain and make a tree of the hihgest                   
+                       (+)       (+)     level of operation tha tin this case is + no i will recomve that term and now i wil give that
+                    20    4    -6   8   modified string to simplify again 
+    in (20-4)*(30+4) so the correct way owuld be
+                         (*)
+                  (-)          (+)
+                20   4      30   4
+                so my program shoudl check for the least importnat operation remove it run the program again after it removed and 
+                one more thing ren the program on the 2 terms too
+
+     i have finally created that function that can porduce this tree now i can create one more recursive fcuntion to 
+     evalutare it too first i shoudl create multipliction additon dividion ,and subtraction fucniton in my term class           
+     now i need my expression class back i shoud lmake add , mul ,etc.. in expression class too.
+     but i dont eed termgroup class i shoudl remove it ---------------------------------
+   
+     
+                                 
+
+
 */
